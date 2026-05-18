@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Registration Platform</title>
+    <!-- Modern Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <div id="app" class="app-container">
+        <!-- Views will be dynamically injected here -->
+    </div>
+
+    <!-- View Templates -->
+    <template id="tpl-navbar">
+        <nav class="navbar">
+            <div class="nav-brand">Complaints Platform</div>
+            <div class="nav-links">
+                <span id="nav-user-info" class="user-info"></span>
+                <button id="btn-logout" class="btn btn-outline" style="display: none;">Logout</button>
+            </div>
+        </nav>
+    </template>
+
+    <template id="tpl-login">
+        <div class="auth-wrapper">
+            <div class="glass-panel auth-panel">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Login to your account to continue</p>
+                <form id="form-login">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+                    <p class="switch-auth">Don't have an account? <a href="#" data-route="register">Register</a></p>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-register">
+        <div class="auth-wrapper">
+            <div class="glass-panel auth-panel">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join our platform today</p>
+                
+                <form id="form-register-step1">
+                    <div class="form-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" required placeholder="john@example.com">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2" id="btn-send-otp">Send OTP</button>
+                    <p class="switch-auth">Already have an account? <a href="#" data-route="login">Login</a></p>
+                </form>
+
+                <form id="form-register-step2" style="display: none;">
+                    <p class="info-text">An OTP has been sent to your email.</p>
+                    <div class="form-group">
+                        <label for="reg-otp">OTP Code</label>
+                        <input type="text" id="reg-otp" required placeholder="123456" maxlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" required placeholder="Choose a secure password">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" required placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2" id="btn-verify-otp">Verify & Register</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-my-complaints">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-header">
+                <h2>My Complaints</h2>
+                <button class="btn btn-primary" data-route="new-complaint">Submit New Complaint</button>
+            </div>
+            <div class="complaints-list" id="user-complaints-list">
+                <div class="loading-spinner">Loading complaints...</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-new-complaint">
+        <div class="dashboard-wrapper">
+            <div class="glass-panel">
+                <button class="btn btn-text mb-2" data-route="my-complaints">← Back</button>
+                <h2>Submit a Complaint</h2>
+                <form id="form-new-complaint">
+                    <div class="form-group">
+                        <label for="complaint-text">What is your complaint?</label>
+                        <textarea id="complaint-text" rows="4" required placeholder="Describe your issue in detail..."></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-get-ai-q">Get Follow-up Question</button>
+                    
+                    <div id="ai-section" style="display: none;" class="mt-4 animate-fade-in">
+                        <div class="ai-question-box">
+                            <strong>AI Follow-up:</strong>
+                            <p id="ai-question-text"></p>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="ai-answer">Your Answer</label>
+                            <textarea id="ai-answer" rows="3" required placeholder="Answer the AI question..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-2" id="btn-submit-final">Submit Full Complaint</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-admin-dashboard">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-header">
+                <h2>Admin Dashboard</h2>
+                <span class="badge">All Complaints</span>
+            </div>
+            <div class="complaints-list" id="admin-complaints-list">
+                <div class="loading-spinner">Loading all complaints...</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Scripts -->
+    <script src="./js/api.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/complaints.js"></script>
+    <script src="./js/admin.js"></script>
+</body>
+</html>
