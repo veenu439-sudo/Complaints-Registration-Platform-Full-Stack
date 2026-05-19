@@ -14,7 +14,7 @@ complaintsRouter.post('/ai/question', authMiddleware, async (req: Request, res: 
         const { complaint_text } = req.body;
         if (!complaint_text) return res.status(400).json({ error: 'Complaint text is required' });
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
         
         const prompt = `Based on the following complaint, generate exactly ONE short, relevant follow-up question to ask the user to gather more useful information about their issue. Do not include any other text, just the question.\n\nComplaint: "${complaint_text}"`;
         
