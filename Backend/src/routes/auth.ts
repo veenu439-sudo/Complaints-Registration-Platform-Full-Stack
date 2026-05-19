@@ -93,9 +93,9 @@ authRouter.post('/login', async (req: Request, res: Response) => {
         );
 
         res.cookie('token', token, {
-            httpOnly: false,
-            secure: false,
-            sameSite: 'lax',
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
         });
 
