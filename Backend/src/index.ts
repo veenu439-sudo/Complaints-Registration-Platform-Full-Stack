@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 const allowedOrigins = [
     'http://127.0.0.1:5500',
     'http://localhost:5500',
-    process.env.FRONTEND_URL || 'https://your-username.github.io' // Replace with your actual GitHub Pages URL
+    process.env.FRONTEND_URL || 'https://veenu439-sudo.github.io' // Replace with your actual GitHub Pages URL
 ];
 
 app.use(cors({
